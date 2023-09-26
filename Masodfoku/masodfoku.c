@@ -20,6 +20,9 @@ struct mosoddfukostruct eredmeny;
     
 }
 int main(){
+    char beker;
+    scanf("%c",&beker);
+printf("%d",beker);
     int a,b,c;
     printf("Másodfoku kiszámítása!!\n");
    while (1==1)
