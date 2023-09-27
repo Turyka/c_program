@@ -102,11 +102,7 @@ printf("Kezdes \n");
                     jobbra = true;
                     break;
                 }else if (innerCh == 'w') {
-                wPressed = true; // 'w' was pressed again
                 }
-            }
-            if (wPressed) {
-            break; // Exit the 'fel' loop if 'w' was pressed again
             }
         }
         while (balra) 

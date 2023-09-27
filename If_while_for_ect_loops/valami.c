@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include <stdbool.h>
 float terulet(float a, float b)
 {
 	float terulet_eredmeny = a * b;
@@ -15,6 +15,7 @@ float kerulet(float a, float b)
 }
 int main()
 {
+	/*
 	srand(time(NULL));
 	
 	for (size_t i = 0; i < 9; i++)
@@ -22,6 +23,7 @@ int main()
 		float rng = rand() % 10;
 		printf("%.2f \n", rng);
 	}
+	*/
 
 
 	/*
@@ -51,10 +53,10 @@ int main()
 		i++;
 	} while (rnd!=100);
 	*/
-	/*
+	srand(time(NULL));
 	int j = 1;
 
-
+	bool sajt = false;
 		while (j <= 50)
 		{
 			int rnd = rand() % 101;
@@ -62,11 +64,19 @@ int main()
 			printf("%i \n", rnd);
 			if (rnd == 100)
 			{
-				printf("Pog");
+				printf("Pog találtunk");
+				sajt = true;
 				break;
-			}
+			} 
 		}
-		*/
+		if (sajt == false)
+		{
+			printf("Nem talaltunk olyan szamot amely 100 lenne");
+		}
+		
+		
+	/*
+	srand(time(NULL));
 	int gondolat;
 
 	int rng = rand() % 10 + 1;
@@ -74,29 +84,23 @@ int main()
 	int h = 1;
 	printf("%i \n", rng);
 
-	while (h<=3)
-	{
-		printf("lehetosegek szama:%i. Gondoltam egy szamra 1-10 ig: ",h);
-		scanf_s("%i", &gondolat);
-		h++;
-		if (rng > gondolat)
-		{
-			printf("Nagyobb a szam \n");
-			continue;
-		}
-		else if (gondolat <rng)
-		{
-			printf("Kisebb a szam \n");
-			continue;
-		}
-		if (rng == gondolat)
-		{
-			printf("nyertel");
-			break;
-		}
-		
-	}
+	 while (h <= 3) {
+        printf("lehetosegek szama:%i. Gondoltam egy szamra 1-10 ig: ", h);
+        scanf("%i", &gondolat);
+        h++;
 
+        if (gondolat < rng) {
+            printf("A gondolt szám nagyobb a szam \n");
+			continue;
+        } else if (gondolat > rng) {
+            printf("A gondolt szám kisebb a szam \n");
+			continue;
+        } else {
+            printf("Nyertel");
+            break;
+        }
+    }
+*/
 
 
 	
