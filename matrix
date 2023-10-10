@@ -1,0 +1,146 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#pragma warning(disable:4996)
+
+void Orderby(int vektor[])
+{
+	for (size_t x = 0; x < 10 - 1; x++)
+	{
+		int Min = vektor[x];
+		int helye = x;
+		for (size_t j = x + 1; j < 10; j++)
+		{
+			if (vektor[j] < Min)
+			{
+				Min = vektor[j];
+				helye = j;
+			}
+		}
+		int k = vektor[x];
+		vektor[x] = vektor[helye];
+		vektor[helye] = k;
+	}
+	printf("Order by MIN:\n");
+	for (size_t z = 0; z < 10; z++)
+	{
+		printf("%d", vektor[z]);
+	}
+
+}
+void matrix_2x3_randomszam()
+{
+	printf("Matrix 2x3: \n");
+	int M[2][3];
+	int V[5];
+	for (size_t i = 0; i < 2; i++)
+	{
+		for (size_t j = 0; j < 3; j++)
+		{
+			int rng = rand() % 9 + 1;
+			M[i][j] = rng;
+			
+		}
+	}
+	int legkisebb = 0;
+	legkisebb = M[0][0];
+
+	for (size_t i = 0; i < 2; i++)
+	{
+		for (size_t j = 0; j < 3; j++)
+		{
+			
+			printf("%d ", M[i][j]);
+			if (M[i][j] < legkisebb)
+			{
+				legkisebb = M[i][j];
+			}
+		}
+		printf("\n");
+	}
+	int seged[6];
+	int k = 0;
+	for (size_t i = 0; i < 2; i++)
+	{
+		for (size_t j= 0; j < 3; j++)
+		{
+			seged[k] = M[i][j];
+			k++;
+		}
+	}
+	printf("Sima atalakitas matrixbol vektroba: \n");
+	for (size_t t = 0; t < 6; t++)
+	{
+		printf("%d",seged[t]);
+	}
+	printf("\n");
+	for (size_t x = 0; x < 6 - 1; x++)
+	{
+		int Min = seged[x];
+		int helye = x;
+		for (size_t j = x + 1; j < 6; j++)
+		{
+			if (seged[j] < Min)
+			{
+				Min = seged[j];
+				helye = j;
+			}
+		}
+		int k = seged[x];
+		seged[x] = seged[helye];
+		seged[helye] = k;
+	}
+	printf("Order by MIN vektoros:\n");
+
+	for (size_t z = 0; z < 6; z++)
+	{
+		printf("%d", seged[z]);
+	}
+	int G[2][3];
+	printf("Matrix vissza : \n");
+	for (size_t i = 0; i < 2; i++)
+	{
+		for (size_t j = 0; j < 3; j++)
+		{
+			G[i][j] = seged[6];
+			printf("%d", G[i][j]);
+		}
+	}
+
+}
+int main()
+{
+	srand(time(NULL));
+	int vektor[10];
+	double atlag = 0;
+	for (size_t i = 0; i < 10; i++)
+	{
+		int rng = rand() % 9 +1;
+		vektor[i] = rng;
+		atlag += vektor[i];
+	}
+	for (size_t i = 0; i < 10; i++)
+	{
+		printf("Rand szamok : %d\n", vektor[i]);
+	}
+	printf("\n");
+	
+	printf("atlag: %f \n", atlag / 10);
+	printf("\n");
+	
+	Orderby(vektor);
+	printf("\n");
+
+	matrix_2x3_randomszam();
+	/*
+	int min = vektor[0];
+	for (size_t i = 0; i < 10; i++)
+	{
+		if (vektor[i] < min)
+		{
+			min = vektor[i];
+		}
+	}
+	printf("%d",min);
+	*/
+}
