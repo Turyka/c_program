@@ -1,0 +1,160 @@
+#include <iostream>
+#include<string>
+#include<conio.h>
+#include <windows.h> // sleep-hez
+
+#pragma warning(disable:4996)
+/*
+#define sor 8
+#define oszlop 8
+*/
+using namespace std;
+class karakterek {
+	int sor;
+	int oszlop;
+	char alakzat;
+public:
+	void setSor(int s)
+	{
+		sor = s;
+	};
+	int getsor()
+	{
+		return sor;
+	};
+	void setOszlop(int o)
+	{
+		oszlop = o;
+	}
+	int getOszlop() 
+	{
+		return oszlop;
+	}
+	void setAlakzat(char a)
+	{
+		alakzat = a;
+	}
+	char getAlakzat()
+	{
+		return alakzat;
+	}
+};
+void rajzol(char** palya, int ps, int po,karakterek jatekos1, karakterek jatekos2,karakterek labda)
+{
+	palya[jatekos1.getsor()][jatekos1.getOszlop()] = jatekos1.getAlakzat();
+	palya[jatekos2.getsor()][jatekos2.getOszlop()] = jatekos2.getAlakzat();
+	palya[labda.getsor()][labda.getOszlop()] = labda.getAlakzat();
+	for (size_t j = 0; j < po; j++)
+	{
+		cout << '-';
+	}
+	printf("\n");
+	for (size_t i = 0; i < ps; i++)
+	{
+		for (size_t j = 0; j < po; j++)
+		{
+			cout << palya[i][j];
+		}
+		printf("\n");
+	}
+	for (size_t j = 0; j < po; j++)
+	{
+		cout << '-';
+	}
+
+}
+int main()
+{
+	srand((unsigned)time(NULL));
+	char** palya;
+	char c;
+	int seged;
+	int ps = 20, po = 20;
+	// Karakterek megadása
+	karakterek jatekos1, jatekos2, labda;
+	jatekos1.setAlakzat('|');
+	jatekos1.setSor(ps/2);
+	jatekos1.setOszlop(0);
+	jatekos2.setAlakzat('|');
+	jatekos2.setSor(ps / 2);
+	jatekos2.setOszlop(po-1);
+	labda.setAlakzat('o');
+	labda.setOszlop(ps / 2);
+	labda.setSor(po / 2);
+	// pálya alap megadása
+	palya = new char* [ps];
+	for (size_t i = 0; i < ps; i++)
+	{
+		palya[i] = new char[po];
+	}
+
+	for (size_t i = 0; i < ps; i++)
+	{
+		for (size_t j = 0; j < po; j++)
+		{
+			palya[i][j] = ' ';
+		}
+	}
+
+	// pálya meghivása
+	do
+	{
+		cout << "\033[2J\033[1;1H";
+		rajzol(palya, po, ps, jatekos1, jatekos2, labda);
+		c = getch();
+		switch (c)
+		{
+		case 'w':
+			if (jatekos1.getsor()>0)
+			{
+				palya[jatekos1.getsor()][jatekos1.getOszlop()] = ' ';
+				jatekos1.setSor(jatekos1.getsor() - 1);
+			}
+			
+			break;
+		case 's':
+			if (jatekos2.getsor() <ps-1)
+			{
+				palya[jatekos1.getsor()][jatekos1.getOszlop()] = ' ';
+				jatekos1.setSor(jatekos1.getsor() + 1);
+			}
+			break;
+		case 72:
+			if (jatekos1.getsor() > 0)
+			{
+				palya[jatekos2.getsor()][jatekos2.getOszlop()] = ' ';
+				jatekos2.setSor(jatekos2.getsor() - 1);
+			}
+			break;
+		case 80:
+			if (jatekos2.getsor() < ps - 1)
+			{
+				palya[jatekos2.getsor()][jatekos2.getOszlop()] = ' ';
+				jatekos2.setSor(jatekos2.getsor() + 1);
+			}
+			break;
+		}
+		palya[labda.getsor()][labda.getOszlop()] = ' ';
+		seged = labda.getsor() + rand() % 3 - 1;
+		if (seged >=0 && seged<=ps-1)
+		{
+			labda.setSor(seged);
+		}
+		seged = labda.getOszlop() + rand() % 3 - 1;
+		if (seged >= 0 && seged <= po-1)
+		{
+			labda.setOszlop(seged);
+		}
+		
+
+	} while (c!='q');
+	
+	for (size_t i = 0; i < ps; i++)
+	{
+		delete [] palya[i];
+	}
+	delete[] palya;
+
+
+
+}
